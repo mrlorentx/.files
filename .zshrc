@@ -75,6 +75,7 @@ plugins=(
 	direnv
 	fzf
 	history
+	autojump
 	zsh-interactive-cd
 	)
 
