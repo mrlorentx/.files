@@ -109,4 +109,7 @@ export NVM_DIR="$HOME/.nvm"
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias gp="git pull"
+alias gcmp="git checkout main && git pull"
+alias gpu="git push --set-upstream $1"
+alias gcb="git checkout $1"
