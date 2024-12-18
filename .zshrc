@@ -113,3 +113,5 @@ alias gp="git pull"
 alias gcmp="git checkout main && git pull"
 alias gpu="git push --set-upstream $1"
 alias gcb="git checkout $1"
+
+export PROJECTS="/Users/joakimlorentz/Projects/"
