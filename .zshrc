@@ -77,7 +77,7 @@ plugins=(
 	history
 	autojump
 	zsh-interactive-cd
-	)
+)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.nvm/nvm.sh
@@ -108,7 +108,7 @@ export NVM_DIR="$HOME/.nvm"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="nvim ~/.zshrc"
 alias gp="git pull"
 alias gcmp="git checkout main && git pull"
 alias gpu="git push --set-upstream $1"
