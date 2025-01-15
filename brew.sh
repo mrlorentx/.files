@@ -38,6 +38,7 @@ brew install node
 brew install direnv
 brew install autojump
 brew install ripgrep
+brew install pngpaste
 
 # Install general casks.
 brew install --cask raycast
