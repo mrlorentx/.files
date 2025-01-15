@@ -37,6 +37,7 @@ brew install nvm
 brew install node
 brew install direnv
 brew install autojump
+brew install ripgrep
 
 # Install general casks.
 brew install --cask raycast
