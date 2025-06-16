@@ -39,11 +39,12 @@ brew install direnv
 brew install autojump
 brew install ripgrep
 brew install pngpaste
+brew install lsd
 
 # Install general casks.
 brew install --cask raycast
-brew install --cask visual-studio-code
 brew install --cask font-fira-code
+brew install --cask mouseless
 
 # Remove outdated versions from the cellar.
 brew cleanup
