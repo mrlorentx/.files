@@ -40,6 +40,7 @@ brew install autojump
 brew install ripgrep
 brew install pngpaste
 brew install lsd
+brew install gum
 
 # Install general casks.
 brew install --cask raycast
