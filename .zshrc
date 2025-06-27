@@ -37,9 +37,9 @@ alias ghd="gh dash"
 
 #Better ls
 alias ls='lsd'
-alias l='ls -l'
-alias la='ls -a'
-alias lla='ls -la'
+alias l='ls -l -1'
+alias la='ls -a -1'
+alias lla='ls -la -1'
 alias lt='ls --tree'
 
 

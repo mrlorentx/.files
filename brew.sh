@@ -42,6 +42,11 @@ brew install pngpaste
 brew install lsd
 brew install gum
 
+# Some of my specific tools.
+brew install neovim
+brew tap FelixKratz/formulae
+brew install sketchybar
+
 # Install general casks.
 brew install --cask raycast
 brew install --cask font-fira-code
