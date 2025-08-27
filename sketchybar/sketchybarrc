@@ -1,0 +1,149 @@
+# Plugins
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+# Tokens
+source "$CONFIG_DIR/tokens/cha_colors.sh"
+source "$CONFIG_DIR/tokens/colors.sh"
+
+# Defaults
+default=(
+	icon.font="Apple Symbols"
+	label.font="JetBrains Mono"
+	icon.color=$COLOR_WHITE
+	label.color=$COLOR_WHITE
+)
+
+sketchybar --default "${default[@]}"
+
+# Bar Appearance
+sketchybar --bar position=top height=56 color=$COLOR_TRANSPARENT
+
+# Workspaces
+workspaces=$(aerospace list-workspaces --all)
+first_workspace=$(echo "$workspaces" | head -n 1)
+last_workspace=$(echo "$workspaces" | tail -n 1)
+
+sketchybar --add event aerospace_workspace_change
+
+for sid in $workspaces; do
+	sketchybar --add item space.$sid left \
+		--subscribe space.$sid aerospace_workspace_change \
+		--set space.$sid \
+      background.color=$CHA_COLOR_BROWNRED1 \
+      background.corner_radius=2 \
+      background.height=20 \
+      background.drawing=off \
+      label.align=center \
+      label.width=20 \
+      label="$sid" \
+      click_script="aerospace workspace $sid" \
+      script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+done
+
+sketchybar --set space.$first_workspace padding_left=2
+
+sketchybar --set space.$last_workspace padding_right=2
+
+sketchybar --add bracket spaces '/space\..*/' \
+	--set spaces background.color=$CHA_COLOR_BG1_75 \
+		background.corner_radius=4 \
+		background.height=24 \
+		background.border_width=1 \
+		background.border_color=$CHA_COLOR_YELLOW3
+
+# Clock
+sketchybar --add item clock right \
+	--set clock \
+		background.color=$CHA_COLOR_BG1_75 \
+		background.corner_radius=4 \
+		background.height=24 \
+		background.border_width=1 \
+		background.border_color=$CHA_COLOR_YELLOW3 \
+		label.padding_left=8 \
+		label.padding_right=8 \
+		update_freq=10 \
+		script="$PLUGIN_DIR/clock.sh"
+
+# Spacer 1
+sketchybar --add item spacer_1 right \
+  --set spacer_1 width=8
+
+# Disk
+sketchybar --add item disk.number right \
+	--set disk.number \
+    label.padding_right=8 \
+		update_freq=10 \
+		script="$PLUGIN_DIR/disk.sh"
+
+sketchybar --add item disk.label right \
+	--set disk.label \
+		label="DISK:" \
+		label.padding_left=8 \
+    label.padding_right=4 \
+		label.color=$CHA_COLOR_YELLOW3
+
+sketchybar --add bracket disk disk.number disk.label \
+	--set disk \
+		background.color=$CHA_COLOR_BG1_75 \
+		background.corner_radius=4 \
+		background.height=24 \
+		background.border_width=1 \
+		background.border_color=$CHA_COLOR_YELLOW3 \
+		padding_left=8
+
+# Spacer 2
+sketchybar --add item spacer_2 right \
+  --set spacer_2 width=8
+
+# RAM
+sketchybar --add item ram.number right \
+	--set ram.number \
+    label.padding_right=8 \
+		update_freq=2 \
+		script="$PLUGIN_DIR/ram.sh"
+
+sketchybar --add item ram.label right \
+	--set ram.label \
+		label="RAM:" \
+		label.padding_left=8 \
+    label.padding_right=4 \
+		label.color=$CHA_COLOR_YELLOW3
+
+sketchybar --add bracket ram ram.number ram.label \
+	--set ram \
+		background.color=$CHA_COLOR_BG1_75 \
+		background.corner_radius=4 \
+		background.height=24 \
+		background.border_width=1 \
+		background.border_color=$CHA_COLOR_YELLOW3 \
+		padding_left=8
+
+# Spacer 3
+sketchybar --add item spacer_3 right \
+  --set spacer_3 width=8
+
+# CPU
+sketchybar --add item cpu.number right \
+	--set cpu.number \
+    label.padding_right=8 \
+		update_freq=2 \
+		script="$PLUGIN_DIR/cpu.sh"
+
+sketchybar --add item cpu.label right \
+	--set cpu.label \
+		label="CPU:" \
+		label.padding_left=8 \
+    label.padding_right=4 \
+		label.color=$CHA_COLOR_YELLOW3
+
+sketchybar --add bracket cpu cpu.number cpu.label \
+	--set cpu \
+		background.color=$CHA_COLOR_BG1_75 \
+		background.corner_radius=4 \
+		background.height=24 \
+		background.border_width=1 \
+		background.border_color=$CHA_COLOR_YELLOW3 \
+		padding_left=8
+
+# Force all scripts to run the first time (never do this in a script)
+sketchybar --update

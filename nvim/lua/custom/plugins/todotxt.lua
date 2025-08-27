@@ -1,0 +1,23 @@
+return {
+  --   'mrlorentx/doit.nvim',
+  --   dev = true,
+  --   dir = '~/projects/doit.nvim',
+  --   keys = {
+  --     {
+  --       '<leader>to',
+  --       function()
+  --         require('doit').toggle_todotxt()
+  --       end,
+  --       desc = 'Reload base.nvim',
+  --       mode = { 'n' },
+  --     },
+  --   },
+  -- }
+  -- return {
+  'atiladefreitas/dooing',
+  config = function()
+    require('dooing').setup {
+      -- your custom config here (optional)
+    }
+  end,
+}

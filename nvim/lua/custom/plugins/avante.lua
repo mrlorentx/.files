@@ -1,21 +1,49 @@
 return {
   'yetone/avante.nvim',
   event = 'VeryLazy',
-  lazy = false,
-  version = false, -- set this if you want to always pull the latest change
-  opts = {
-    -- add any opts here
-  },
-  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  version = false, -- Never set this value to "*"! Never!
   build = 'make',
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+  opts = {
+    provider = 'morph',
+    providers = {
+      llmproxy = {
+        __inherited_from = 'openai',
+        endpoint = 'https://llmproxy.a2d.tv/v1',
+        api_key_name = 'LLM_PROXY_API_KEY',
+        model = 'gpt-4.1',
+      },
+      morph = {
+        model = 'auto',
+      },
+
+      copilot = {
+        endpoint = 'https://api.githubcopilot.com',
+        model = 'claude-3.7-sonnet',
+        proxy = nil, -- [protocol://]host[:port] Use this proxy
+        allow_insecure = false, -- Allow insecure server connections
+        timeout = 30000, -- Timeout in milliseconds
+      },
+    },
+    behaviour = {
+      auto_suggestions = false,
+      enable_fastapply = true,
+      enable_cursor_planning_mode = true,
+      auto_suggestions_respect_ignore = true,
+      enable_claude_text_editor_tool_mode = true,
+      use_cwd_as_project_root = true,
+    },
+  },
   dependencies = {
+    'nvim-treesitter/nvim-treesitter',
     'stevearc/dressing.nvim',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
     --- The below dependencies are optional,
+    'echasnovski/mini.pick', -- for file_selector provider mini.pick
+    'nvim-telescope/telescope.nvim', -- for file_selector provider telescope
     'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
-    'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
+    'ibhagwan/fzf-lua', -- for file_selector provider fzf
+    -- 'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
     'zbirenbaum/copilot.lua', -- for providers='copilot'
     {
       -- support for image pasting
@@ -34,13 +62,5 @@ return {
         },
       },
     },
-    -- {
-    --   -- Make sure to set this up properly if you have lazy=true
-    --   'MeanderingProgrammer/render-markdown.nvim',
-    --   opts = {
-    --     file_types = { 'markdown', 'Avante' },
-    --   },
-    --   ft = { 'markdown', 'Avante' },
-    -- },
   },
 }

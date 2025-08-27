@@ -28,6 +28,7 @@ brew install grep
 brew install openssh
 brew install screen
 brew install gmp
+brew install git
 
 # Install general tooling.
 brew install fzf

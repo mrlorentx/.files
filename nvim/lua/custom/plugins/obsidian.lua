@@ -1,12 +1,9 @@
 local picker_name = 'telescope.nvim'
--- local picker_name = "mini.pick"
--- local picker_name = "fzf-lua"
 
 return {
   {
     'lukas-reineke/headlines.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    lazy = true,
     config = function()
       local bg = '#2B2B2B'
 
@@ -45,16 +42,14 @@ return {
     end,
   },
   {
-    'epwalsh/obsidian.nvim',
-    lazy = true,
+    'obsidian-nvim/obsidian.nvim',
     ft = 'markdown',
-    -- event = {
-    --   "BufReadPre " .. vim.fn.resolve(vim.fn.expand "~/Obsidian/notes") .. "/*",
-    --   "BufNewFile " .. vim.fn.resolve(vim.fn.expand "~/Obsidian/notes") .. "/*",
-    -- },
+    event = {
+      'BufReadPre ' .. vim.fn.resolve(vim.fn.expand '~/Obsidian/notes') .. '/*',
+      'BufNewFile ' .. vim.fn.resolve(vim.fn.expand '~/Obsidian/notes') .. '/*',
+    },
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-cmp',
       'headlines.nvim',
       picker_name,
     },
@@ -79,6 +74,108 @@ return {
         { '<leader>on', '<cmd>ObsidianQuickSwitch nav<cr>', desc = 'Nav' },
         { '<leader>or', '<cmd>ObsidianRename<cr>', desc = 'Rename' },
         { '<leader>oc', '<cmd>ObsidianTOC<cr>', desc = 'Contents (TOC)' },
+        {
+          '<leader>ow',
+          function()
+            local Note = require 'obsidian.note'
+            ---@type obsidian.Client
+            local client = require('obsidian').get_client()
+            assert(client)
+
+            local picker = client:picker()
+            if not picker then
+              client.log.err 'No picker configured'
+              return
+            end
+
+            ---@param dt number
+            ---@return obsidian.Path
+            local function weekly_note_path(dt)
+              return client.dir / os.date('notes/weekly/week-of-%Y-%m-%d.md', dt)
+            end
+
+            ---@param dt number
+            ---@return string
+            local function weekly_alias(dt)
+              local alias = os.date('Week of %A %B %d, %Y', dt)
+              assert(type(alias) == 'string')
+              return alias
+            end
+
+            local day_of_week = os.date '%A'
+            assert(type(day_of_week) == 'string')
+
+            ---@type integer
+            local offset_start
+            if day_of_week == 'Sunday' then
+              offset_start = 1
+            elseif day_of_week == 'Monday' then
+              offset_start = 0
+            elseif day_of_week == 'Tuesday' then
+              offset_start = -1
+            elseif day_of_week == 'Wednesday' then
+              offset_start = -2
+            elseif day_of_week == 'Thursday' then
+              offset_start = -3
+            elseif day_of_week == 'Friday' then
+              offset_start = -4
+            elseif day_of_week == 'Saturday' then
+              offset_start = 2
+            end
+            assert(offset_start)
+
+            local current_week_dt = os.time() + (offset_start * 3600 * 24)
+            ---@type obsidian.PickerEntry
+            local weeklies = {}
+            for week_offset = 1, -2, -1 do
+              local week_dt = current_week_dt + (week_offset * 3600 * 24 * 7)
+              local week_alias = weekly_alias(week_dt)
+              local week_display = week_alias
+              local path = weekly_note_path(week_dt)
+
+              if week_offset == 0 then
+                week_display = week_display .. ' @current'
+              elseif week_offset == 1 then
+                week_display = week_display .. ' @next'
+              elseif week_offset == -1 then
+                week_display = week_display .. ' @last'
+              end
+
+              if not path:is_file() then
+                week_display = week_display .. ' ➡️ create'
+              end
+
+              weeklies[#weeklies + 1] = {
+                value = week_dt,
+                display = week_display,
+                ordinal = week_display,
+                filename = tostring(path),
+              }
+            end
+
+            picker:pick(weeklies, {
+              prompt_title = 'Weeklies',
+              callback = function(dt)
+                local path = weekly_note_path(dt)
+                ---@type obsidian.Note
+                local note
+                if path:is_file() then
+                  note = Note.from_file(path)
+                else
+                  note = client:create_note {
+                    template = 'weekly.md',
+                    id = path.name,
+                    dir = path:parent(),
+                    title = weekly_alias(dt),
+                    tags = { 'weekly-notes' },
+                  }
+                end
+                client:open_note(note)
+              end,
+            })
+          end,
+          desc = 'Weeklies',
+        },
         {
           mode = { 'v' },
           -- { "<leader>o", group = "Obsidian" },
@@ -115,23 +212,26 @@ return {
       }
     end,
     opts = {
+      ui = { enable = false },
       workspaces = {
-        { name = 'personal', path = '~/vaults/personal' },
         { name = 'work', path = '~/vaults/work' },
       },
       daily_notes = {
-        default_tags = { 'daily-notes', 'tv4' },
+        default_tags = { 'daily-notes' },
+        workays_only = true,
         template = 'dailies.md',
       },
-      completion = {
-        nvim_cmp = true,
-        min_chars = 2,
-      },
+      notes_subdir = 'notes',
       templates = {
-        folder = 'templates',
+        folder = '~/vaults/templates',
         date_format = '%Y-%m-%d',
         time_format = '%H:%M',
       },
+      ---@param url string
+      follow_url_func = function(url)
+        -- Open the URL in the default web browser.
+        vim.fn.jobstart { 'open', url }
+      end,
     },
   },
 }

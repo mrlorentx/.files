@@ -25,6 +25,9 @@ source <(fzf --zsh)
 
 source ~/projects/.files/.aliases
 
+# Prefer brew git over apple git
+export PATH=/opt/homebrew/bin:$PATH
+
 # General aliases
 alias zshconfig="nvim ~/.zshrc"
 alias gp="git pull"
@@ -69,10 +72,6 @@ esac
 alias githist='git log --abbrev-commit --oneline $(git merge-base origin/main HEAD)^..HEAD'
 
 eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/powerlevel10k_lean.omp.json')"
-alias v2gif='functiuon v2gif() {
-    output_file="${1%.*}.gif"
-    ffmpeg -y -i "$1" -v quiet -vf scale=iw/2:ih/2 -pix_fmt rgb8 -r 10 "$output_file" && gifsicle -O3 "$output_file" -o "$output_file"
-}'
 
 go env -w GOPRIVATE='github.com/TV4\/*'
 export GOPATH="$HOME/go"
