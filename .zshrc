@@ -37,7 +37,6 @@ alias gcb="git checkout $1"
 
 alias ghd="gh dash"
 
-
 #Better ls
 alias ls='lsd'
 alias l='ls -l -1'
@@ -79,4 +78,6 @@ export PATH="$GOPATH/bin:$PATH"
 
 export GPG_TTY=$(tty)
 
+# mise config
 eval "$(mise activate zsh)"
+alias mr="mise run"
