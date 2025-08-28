@@ -79,3 +79,4 @@ export PATH="$GOPATH/bin:$PATH"
 
 export GPG_TTY=$(tty)
 
+eval "$(mise activate zsh)"
