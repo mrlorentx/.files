@@ -52,8 +52,9 @@ test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
 source ~/projects/.files/.secrets.sh
 
-export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address')
+export DOCKER_HOST=unix:///$HOME/.colima/docker.sock
 
 [[ -s "/Users/joakimlorentz/.gvm/scripts/gvm" ]] && source "/Users/joakimlorentz/.gvm/scripts/gvm"
 export GPG_TTY=$(tty)
@@ -70,7 +71,8 @@ esac
 
 alias githist='git log --abbrev-commit --oneline $(git merge-base origin/main HEAD)^..HEAD'
 
-eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/powerlevel10k_lean.omp.json')"
+eval "$(starship init zsh)"
+# eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/powerlevel10k_lean.omp.json')"
 
 go env -w GOPRIVATE='github.com/TV4\/*'
 export GOPATH="$HOME/go"
@@ -81,3 +83,5 @@ export GPG_TTY=$(tty)
 # mise config
 eval "$(mise activate zsh)"
 alias mr="mise run"
+
+alias dockerlgtm="docker run -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti grafana/otel-lgtm"

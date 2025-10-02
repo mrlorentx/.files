@@ -220,7 +220,7 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         ts_ls = {
-          root_dir = require('lspconfig').util.root_pattern { 'package.json', 'tsconfig.json' },
+          root_dir = require('lspconfig').util.root_pattern { 'tsconfig.json' },
           single_file_support = false,
           settings = {},
         },
@@ -229,7 +229,7 @@ return {
         --   single_file_support = false,
         --   settings = {},
         -- },
-        --
+
         prettier = {},
         astro = {},
         --

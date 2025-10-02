@@ -34,6 +34,7 @@ return {
         javascript = { 'prettier' },
         typescript = { 'prettier' },
         go = { 'goimports', 'gofumpt' },
+        toml = { 'taplo' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

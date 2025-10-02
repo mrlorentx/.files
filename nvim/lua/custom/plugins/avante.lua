@@ -4,7 +4,7 @@ return {
   version = false, -- Never set this value to "*"! Never!
   build = 'make',
   opts = {
-    provider = 'morph',
+    provider = 'copilot',
     providers = {
       llmproxy = {
         __inherited_from = 'openai',
@@ -18,7 +18,7 @@ return {
 
       copilot = {
         endpoint = 'https://api.githubcopilot.com',
-        model = 'claude-3.7-sonnet',
+        model = 'claude-4.5-sonnet-preview',
         proxy = nil, -- [protocol://]host[:port] Use this proxy
         allow_insecure = false, -- Allow insecure server connections
         timeout = 30000, -- Timeout in milliseconds
