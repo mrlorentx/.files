@@ -48,7 +48,7 @@ return {
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'headlines.nvim',
+      -- 'headlines.nvim',
     },
 
     config = function(_, opts)
