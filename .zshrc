@@ -28,15 +28,6 @@ source ~/projects/.files/.aliases
 # Prefer brew git over apple git
 export PATH=/opt/homebrew/bin:$PATH
 
-# General aliases
-alias zshconfig="nvim ~/.zshrc"
-alias gp="git pull"
-alias gcmp="git checkout main && git pull"
-alias gpu="git push --set-upstream origin $1"
-alias gcb="git checkout $1"
-
-alias ghd="gh dash"
-
 #Better ls
 alias ls='lsd'
 alias l='ls -l -1'
@@ -47,10 +38,8 @@ alias lt='ls --tree'
 
 export PROJECTS="/users/joakimlorentz/Projects"
 
-. "/Users/joakimlorentz/.deno/env"
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-
 source ~/projects/.files/.secrets.sh
+
 
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address')
@@ -68,20 +57,10 @@ case ":$PATH:" in
 esac
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
 
-
-alias githist='git log --abbrev-commit --oneline $(git merge-base origin/main HEAD)^..HEAD'
-
 eval "$(starship init zsh)"
-# eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/powerlevel10k_lean.omp.json')"
 
 go env -w GOPRIVATE='github.com/TV4\/*'
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 export GPG_TTY=$(tty)
-
-# mise config
-eval "$(mise activate zsh)"
-alias mr="mise run"
-
-alias dockerlgtm="docker run -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti grafana/otel-lgtm"
