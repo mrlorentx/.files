@@ -38,7 +38,7 @@ alias lt='ls --tree'
 
 export PROJECTS="/users/joakimlorentz/Projects"
 
-source ~/projects/.files/.secrets.sh
+source ~/projects/.files/zsh/secrets-sourcer.zsh
 
 
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
