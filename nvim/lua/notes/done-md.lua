@@ -1,6 +1,6 @@
 return {
   {
-    dir = vim.fn.expand '~/Projects/done-md.nvim', -- your local path
+    dir = vim.fn.expand '~/Work/done-md.nvim', -- your local path
     name = 'done-md.nvim',
     main = 'donemd', -- => require("donemd")
     dev = true, -- local dev mode
