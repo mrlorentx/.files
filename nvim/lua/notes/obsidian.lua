@@ -41,11 +41,6 @@ return {
   },
   {
     'obsidian-nvim/obsidian.nvim',
-    ft = 'markdown',
-    event = {
-      'BufReadPre ' .. vim.fn.resolve(vim.fn.expand '~/Obsidian/notes') .. '/*',
-      'BufNewFile ' .. vim.fn.resolve(vim.fn.expand '~/Obsidian/notes') .. '/*',
-    },
     dependencies = {
       'nvim-lua/plenary.nvim',
       -- 'headlines.nvim',
@@ -212,7 +207,7 @@ return {
     opts = {
       ui = { enable = false },
       workspaces = {
-        { name = 'work', path = '~/vaults/work' },
+        { name = 'notes', path = '~/vaults' },
       },
       picker = {
         name = 'telescope.nvim',

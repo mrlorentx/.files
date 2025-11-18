@@ -13,9 +13,9 @@ return {
         model = 'gpt-4.1',
       },
 
-      -- morph = {
-      --   model = 'auto',
-      -- },
+      morph = {
+        model = 'auto',
+      },
 
       copilot = {
         endpoint = 'https://api.githubcopilot.com',
@@ -27,7 +27,7 @@ return {
     },
     behaviour = {
       auto_suggestions = false,
-      -- enable_fastapply = true,
+      enable_fastapply = true,
       enable_cursor_planning_mode = true,
       auto_suggestions_respect_ignore = true,
       enable_claude_text_editor_tool_mode = true,

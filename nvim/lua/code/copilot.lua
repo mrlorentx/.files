@@ -5,6 +5,9 @@ return {
     copilot.setup {
       suggestion = { enabled = false },
       panel = { enabled = false },
+      filetypes = {
+        markdown = false, -- disable copilot for markdown files
+      },
     }
   end,
 }
