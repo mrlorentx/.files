@@ -1,0 +1,1 @@
+/home/mrlorentx/Work/Neovim-theme-switcher/theme.lua
