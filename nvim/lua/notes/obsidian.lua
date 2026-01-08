@@ -224,12 +224,6 @@ return {
         time_format = '%H:%M',
       },
       legacy_commands = false,
-
-      ---@param url string
-      follow_url_func = function(url)
-        -- Open the URL in the default web browser.
-        vim.fn.jobstart { 'open', url }
-      end,
     },
   },
 }
