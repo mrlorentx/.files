@@ -6,23 +6,9 @@ return {
   opts = {
     provider = 'copilot',
     providers = {
-      llmproxy = {
-        __inherited_from = 'openai',
-        endpoint = 'https://llmproxy.a2d.tv/v1',
-        api_key_name = 'LLM_PROXY_API_KEY',
-        model = 'gpt-4.1',
-      },
-
-      morph = {
-        model = 'auto',
-      },
-
       copilot = {
         endpoint = 'https://api.githubcopilot.com',
-        model = 'claude-4.5-sonnet-preview',
-        proxy = nil, -- [protocol://]host[:port] Use this proxy
-        allow_insecure = false, -- Allow insecure server connections
-        timeout = 30000, -- Timeout in milliseconds
+        model = 'claude-4.6-sonnet',
       },
     },
     behaviour = {
@@ -45,7 +31,7 @@ return {
     'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
     'ibhagwan/fzf-lua', -- for file_selector provider fzf
     -- 'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
-    'zbirenbaum/copilot.lua', -- for providers='copilot'
+    -- 'zbirenbaum/copilot.lua', -- for providers='copilot'
     {
       -- support for image pasting
       'HakonHarnes/img-clip.nvim',
