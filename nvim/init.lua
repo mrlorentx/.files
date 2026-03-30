@@ -62,8 +62,17 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.pack.add({ "https://github.com/folke/tokyonight.nvim" }, { confirm = false })
 vim.cmd.colorscheme("tokyonight-night")
 
--- INFO: formatting and syntax highlighting
+-- INFO: treesitter (parser installer, highlighting enabled in plugin/treesitter.lua)
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" }, { confirm = false })
+
+require("nvim-treesitter").install({
+	"bash", "c", "diff", "html", "lua", "luadoc",
+	"markdown", "markdown_inline", "query", "vim", "vimdoc",
+	"go", "gomod", "gosum", "gotmpl",
+	"javascript", "typescript", "astro",
+	"json", "toml", "yaml",
+	"python",
+})
 
 -- uncomment to enable automatic plugin updates
 -- vim.pack.update()
