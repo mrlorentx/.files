@@ -16,7 +16,7 @@ require("blink.cmp").setup({
 		["<C-e>"] = { "cancel", "fallback" },
 		["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 
-		["<Tab>"] = { "snippet_forward", "fallback" },
+		["<Tab>"] = { "select_and_accept", "snippet_forward", "fallback" },
 		["<S-Tab>"] = { "snippet_backward", "fallback" },
 
 		["<C-b>"] = { "scroll_documentation_up", "fallback" },

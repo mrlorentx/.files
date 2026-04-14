@@ -24,6 +24,14 @@
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
+    "live-server.nvim": {
+      "rev": "1ee8ab4cbd18e2b2b38236321a73edcaba023fbd",
+      "src": "https://github.com/selimacerbas/live-server.nvim"
+    },
+    "markdown-preview.nvim": {
+      "rev": "793b32e327bd51143d7cc345aa3ecd10c357ddee",
+      "src": "https://github.com/selimacerbas/markdown-preview.nvim"
+    },
     "mason-conform.nvim": {
       "rev": "48da2ebd5efbaf8a99566eadc3ece82d523f03c5",
       "src": "https://github.com/zapling/mason-conform.nvim"

@@ -69,7 +69,7 @@ require("nvim-treesitter").install({
 	"bash", "c", "diff", "html", "lua", "luadoc",
 	"markdown", "markdown_inline", "query", "vim", "vimdoc",
 	"go", "gomod", "gosum", "gotmpl",
-	"javascript", "typescript", "astro",
+	"javascript", "typescript", "tsx", "astro",
 	"json", "toml", "yaml",
 	"python",
 })

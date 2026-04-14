@@ -1,7 +1,6 @@
 vim.pack.add({ "https://github.com/folke/which-key.nvim" }, { confirm = false })
 
 require("which-key").setup({
-	delay = 0,
 	icons = {
 		mappings = vim.g.have_nerd_font,
 		keys = vim.g.have_nerd_font and {} or {
