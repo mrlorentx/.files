@@ -26,7 +26,6 @@ alias ls='lsd'
 alias l='ls -l -1'
 alias la='ls -a -1'
 alias lla='ls -la -1'
-alias lt='ls --tree'
 
 # pnpm
 export PNPM_HOME="/Users/joakimlorentz/Library/pnpm"
