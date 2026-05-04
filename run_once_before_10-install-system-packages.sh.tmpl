@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PKG_DIR="{{ .chezmoi.sourceDir }}/packages"
+
+if [[ -f "$PKG_DIR/arch.txt" ]]; then
+  mapfile -t pkgs < <(grep -v '^#\|^$' "$PKG_DIR/arch.txt")
+  if (( ${#pkgs[@]} > 0 )); then
+    sudo pacman -S --needed --noconfirm "${pkgs[@]}"
+  fi
+fi
+
+if [[ -f "$PKG_DIR/aur.txt" ]] && command -v yay >/dev/null 2>&1; then
+  mapfile -t pkgs < <(grep -v '^#\|^$' "$PKG_DIR/aur.txt")
+  if (( ${#pkgs[@]} > 0 )); then
+    yay -S --needed --noconfirm "${pkgs[@]}"
+  fi
+fi

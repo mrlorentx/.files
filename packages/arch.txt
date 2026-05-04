@@ -1,0 +1,10 @@
+# Native packages installed via pacman.
+# Anything that ships as a daemon, GUI app, or system tool that doesn't
+# fit mise's binary-only model goes here.
+
+mise
+
+nmap
+postgresql
+tailscale
+voxtype-bin

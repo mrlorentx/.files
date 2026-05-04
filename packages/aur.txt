@@ -1,0 +1,8 @@
+# AUR packages installed via yay.
+# GUI apps and system services not available in official repos.
+
+aws-session-manager-plugin
+hyprmon-bin
+slack-desktop
+solaar-git
+zen-browser-bin
