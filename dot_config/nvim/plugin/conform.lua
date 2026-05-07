@@ -16,6 +16,7 @@ require("conform").setup({
 		lua = { "stylua" },
 		javascript = { "prettier" },
 		typescript = { "prettier" },
+		markdown = { "prettier" },
 		go = { "goimports", "gofumpt" },
 		toml = { "taplo" },
 	},
