@@ -40,6 +40,7 @@ for server, config in pairs(lsp_servers) do
 end
 
 vim.lsp.enable(vim.tbl_keys(lsp_servers))
+vim.o.completeopt = "menuone,noselect,fuzzy"
 
 -- LSP keymaps (set on attach)
 vim.api.nvim_create_autocmd("LspAttach", {

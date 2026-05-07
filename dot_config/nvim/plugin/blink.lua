@@ -5,6 +5,30 @@ require("blink.cmp").setup({
 		documentation = {
 			auto_show = true,
 		},
+		list = {
+			max_items = 5,
+		},
+		menu = {
+			draw = {
+				columns = {
+					{ "label", "label_description", gap = 1 },
+					{ "kind_icon", "kind" },
+					{ "source_name" },
+				},
+			},
+		},
+	},
+
+	sources = {
+		default = { "lsp", "path", "snippets", "buffer", "copilot" },
+		providers = {
+			copilot = {
+				name = "copilot",
+				module = "blink-cmp-copilot",
+				score_offset = 100,
+				async = true,
+			},
+		},
 	},
 
 	-- default blink keymaps
@@ -16,8 +40,18 @@ require("blink.cmp").setup({
 		["<C-e>"] = { "cancel", "fallback" },
 		["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 
-		["<Tab>"] = { "select_and_accept", "snippet_forward", "fallback" },
-		["<S-Tab>"] = { "snippet_backward", "fallback" },
+		["<CR>"] = { "select_and_accept", "fallback" },
+		["<Tab>"] = {
+			function() -- sidekick next edit suggestion
+				return require("sidekick").nes_jump_or_apply()
+			end,
+			function() -- native LSP inline completion (copilot-lsp ghost text)
+				return vim.lsp.inline_completion.get()
+			end,
+			"snippet_forward", -- if in snippet, jump forward
+			"fallback", -- menu nav lives on <C-n>/<C-p>
+		},
+		["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 
 		["<C-b>"] = { "scroll_documentation_up", "fallback" },
 		["<C-f>"] = { "scroll_documentation_down", "fallback" },
