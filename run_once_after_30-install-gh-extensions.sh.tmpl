@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+EXT_FILE="{{ .chezmoi.sourceDir }}/packages/gh-extensions.txt"
+
+if ! command -v gh >/dev/null 2>&1; then
+  echo "gh not found on PATH; check that mise installed it" >&2
+  exit 1
+fi
+
+[[ -f "$EXT_FILE" ]] || exit 0
+
+installed=$(gh extension list 2>/dev/null | awk '{print $1}')
+
+while IFS= read -r ext; do
+  [[ -z "$ext" || "$ext" =~ ^# ]] && continue
+  name="gh-${ext##*/}"
+  if ! grep -qx "$name" <<<"$installed"; then
+    gh extension install "$ext"
+  fi
+done < "$EXT_FILE"

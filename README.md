@@ -35,8 +35,10 @@ dot_local/bin/                → ~/.local/bin/ (personal scripts)
 packages/
   arch.txt                    pacman packages beyond omarchy baseline
   aur.txt                     yay/AUR packages
+  gh-extensions.txt           gh CLI extensions
 run_once_before_10-install-system-packages.sh.tmpl
 run_once_after_20-install-mise-tools.sh
+run_once_after_30-install-gh-extensions.sh.tmpl
 keymaps/                      ZMK firmware (not deployed, just stored)
 ```
 
