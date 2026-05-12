@@ -56,12 +56,6 @@ require("snacks").setup({
 						end,
 						height = 7,
 					},
-					{
-						icon = " ",
-						title = "Git Status",
-						cmd = "git --no-pager diff --stat -B -M -C",
-						height = 10,
-					},
 				}
 				return vim.tbl_map(function(cmd)
 					return vim.tbl_extend("force", {
