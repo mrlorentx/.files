@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Re-trigger when either package list changes. Sprig sha256sum on the file
+# contents makes chezmoi see a content change and re-run the script.
+# arch.txt sha256: {{ include (joinPath .chezmoi.sourceDir "packages/arch.txt") | sha256sum }}
+# aur.txt sha256:  {{ include (joinPath .chezmoi.sourceDir "packages/aur.txt") | sha256sum }}
+
 PKG_DIR="{{ .chezmoi.sourceDir }}/packages"
 
 if [[ -f "$PKG_DIR/arch.txt" ]]; then

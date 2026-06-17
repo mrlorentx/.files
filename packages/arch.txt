@@ -4,6 +4,7 @@
 
 mise
 
+mosh
 nmap
 postgresql
 tailscale
