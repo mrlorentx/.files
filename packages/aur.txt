@@ -6,3 +6,5 @@ hyprmon-bin
 slack-desktop
 solaar-git
 zen-browser-bin
+google-cloud-cli
+rencal-bin
