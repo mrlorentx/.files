@@ -19,6 +19,7 @@ vim.opt.relativenumber = true
 vim.opt.mouse = "a"
 
 vim.opt.clipboard = "unnamedplus"
+vim.g.clipboard = "osc52"
 
 vim.opt.undofile = true
 
