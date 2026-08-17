@@ -1,28 +1,77 @@
 {
   "plugins": {
-    "archwave": {
-      "rev": "b3e6b814989dc5dd58b25bc4c73667b4827bcb4c",
-      "src": "https://github.com/davidguttman/archwave"
+    "aether": {
+      "rev": "02af9ba1ef9d6f136a6b20404d39f2a4e3857e16",
+      "src": "https://github.com/bjarneo/aether.nvim",
+      "version": "'v3'"
+    },
+    "aether.nvim": {
+      "rev": "02af9ba1ef9d6f136a6b20404d39f2a4e3857e16",
+      "src": "https://github.com/bjarneo/aether.nvim"
+    },
+    "ashen.nvim": {
+      "rev": "bfb04bd50b69d863469b2deb9fb361cf0d945ba7",
+      "src": "https://github.com/ficcdaf/ashen.nvim"
+    },
+    "bamboo.nvim": {
+      "rev": "1309bc88bffcf1bedc3e84e7fa9004de93da774a",
+      "src": "https://github.com/ribru17/bamboo.nvim"
+    },
+    "blink-cmp-copilot": {
+      "rev": "439cff78780c033aa23cf061d7315314b347e3c1",
+      "src": "https://github.com/giuxtaposition/blink-cmp-copilot"
     },
     "blink.cmp": {
       "rev": "8a2060dff4e68ac17f1c92aed526c76fb0c1ac2f",
       "src": "https://github.com/saghen/blink.cmp"
     },
+    "catppuccin": {
+      "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
+      "src": "https://github.com/catppuccin/nvim"
+    },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "copilot-lsp": {
+      "rev": "1b6d8273594643f51bb4c0c1d819bdb21b42159d",
+      "src": "https://github.com/copilotlsp-nvim/copilot-lsp"
+    },
+    "copilot.lua": {
+      "rev": "61784cb7a1a109d72b9cb107ee70d11bc7d095ff",
+      "src": "https://github.com/zbirenbaum/copilot.lua"
+    },
+    "copilot.vim": {
+      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+      "src": "https://github.com/github/copilot.vim"
     },
     "ethereal.nvim": {
       "rev": "a0ec73332e537228981b6a4f465cef82bb3e1d36",
       "src": "https://github.com/bjarneo/ethereal.nvim"
     },
+    "everforest-nvim": {
+      "rev": "a0e9edc57379e8feafc6ba207c26dbb12fc1b6d8",
+      "src": "https://github.com/neanias/everforest-nvim"
+    },
     "flash.nvim": {
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
       "src": "https://github.com/folke/flash.nvim"
     },
+    "flexoki-neovim": {
+      "rev": "c3e2251e813d29d885a7cbbe9808a7af234d845d",
+      "src": "https://github.com/kepano/flexoki-neovim"
+    },
     "gitsigns.nvim": {
       "rev": "50c205548d8b037b7ff6378fca6d21146f0b6161",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "gruvbox.nvim": {
+      "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
+      "src": "https://github.com/ellisonleao/gruvbox.nvim"
+    },
+    "hackerman.nvim": {
+      "rev": "d7699ce7639686b8f3a5ae108b496a32ee5c076d",
+      "src": "https://github.com/bjarneo/hackerman.nvim"
     },
     "headlines.nvim": {
       "rev": "bf17c96a836ea27c0a7a2650ba385a7783ed322e",
@@ -31,6 +80,10 @@
     "indent-blankline.nvim": {
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
+    },
+    "kanagawa.nvim": {
+      "rev": "bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3",
+      "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "live-server.nvim": {
       "rev": "1ee8ab4cbd18e2b2b38236321a73edcaba023fbd",
@@ -76,6 +129,10 @@
       "rev": "84c75e7a7e443586f60508d12fc50f90d9aee14e",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
     },
+    "nightfox.nvim": {
+      "rev": "4dacd3f0185a2227bdf3b6c0975a8f0bf87cac9a",
+      "src": "https://github.com/EdenEast/nightfox.nvim"
+    },
     "nui.nvim": {
       "rev": "de740991c12411b663994b2860f1a4fd0937c130",
       "src": "https://github.com/MunifTanjim/nui.nvim"
@@ -100,14 +157,6 @@
       "rev": "38552249c6dbeaa539849171b859f8cc8441a536",
       "src": "https://github.com/obsidian-nvim/obsidian.nvim"
     },
-    "omarchy-theme-loader.nvim": {
-      "rev": "ccaaf12162ce47d259afd9b56287f45a41df0fb5",
-      "src": "https://github.com/EskelinenAntti/omarchy-theme-loader.nvim"
-    },
-    "omarchy-void-theme": {
-      "rev": "c1fc95a579bf5c5e1d3b9edd43b1df501b5bd5c9",
-      "src": "https://github.com/vyrx-dev/omarchy-void-theme.git"
-    },
     "plenary.nvim": {
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
       "src": "https://github.com/nvim-lua/plenary.nvim"
@@ -115,6 +164,14 @@
     "retro-82.nvim": {
       "rev": "8f81d59140b0a1a07e14b095f113b7883401eb35",
       "src": "https://github.com/OldJobobo/retro-82.nvim"
+    },
+    "rose-pine": {
+      "rev": "ff483051a47e27d84bdef47703538df1ed9f4a47",
+      "src": "https://github.com/rose-pine/neovim"
+    },
+    "sidekick.nvim": {
+      "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
+      "src": "https://github.com/folke/sidekick.nvim"
     },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
@@ -155,6 +212,10 @@
     "vim-rhubarb": {
       "rev": "5496d7c94581c4c9ad7430357449bb57fc59f501",
       "src": "https://github.com/tpope/vim-rhubarb"
+    },
+    "vim-tmux-navigator": {
+      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
+      "src": "https://github.com/christoomey/vim-tmux-navigator"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
