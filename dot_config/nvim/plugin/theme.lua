@@ -131,10 +131,17 @@ local function sync()
 	end
 
 	if type(colorscheme) == "function" then
+		-- A theme defining its highlights inline never runs :colorscheme, so the
+		-- ColorScheme events don't fire on their own. Emit them, or anything that
+		-- restyles itself per theme (headlines.nvim groups in plugin/notes.lua)
+		-- silently keeps the previous theme's colors.
+		vim.api.nvim_exec_autocmds("ColorSchemePre", { pattern = "omarchy" })
 		local applied, cs_err = pcall(colorscheme)
 		if not applied then
 			vim.notify(string.format("Inline colorscheme failed: %s", cs_err), vim.log.levels.ERROR)
+			return
 		end
+		vim.api.nvim_exec_autocmds("ColorScheme", { pattern = vim.g.colors_name or "omarchy" })
 	elseif colorscheme then
 		local applied = pcall(vim.cmd.colorscheme, colorscheme)
 		if not applied then

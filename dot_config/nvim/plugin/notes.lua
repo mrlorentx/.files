@@ -1,12 +1,113 @@
 -- headlines.nvim (markdown heading highlights)
 vim.pack.add({ "https://github.com/lukas-reineke/headlines.nvim" }, { confirm = false })
 
-local bg = "#2B2B2B"
-vim.api.nvim_set_hl(0, "Headline1", { fg = "#33ccff", bg = bg })
-vim.api.nvim_set_hl(0, "Headline2", { fg = "#00bfff", bg = bg })
-vim.api.nvim_set_hl(0, "Headline3", { fg = "#0099cc", bg = bg })
-vim.api.nvim_set_hl(0, "CodeBlock", { bg = bg })
-vim.api.nvim_set_hl(0, "Dash", { fg = "#D19A66", bold = true })
+-- Headline colors follow the active Omarchy theme.
+--
+-- These used to be hardcoded to a Tokyo Night palette. Colorschemes that define
+-- the headlines.nvim groups themselves (tokyonight, catppuccin) overrode them,
+-- but the ones that don't (gruvbox, kanagawa, everforest, nordfox, rose-pine)
+-- let the hardcoded values leak through -- a near-invisible band on gruvbox, and
+-- a dark band with cyan text on light themes like rose-pine. So: defer to the
+-- colorscheme when it styles these groups, and otherwise derive them from it.
+
+local HEADLINE_GROUPS = { "Headline1", "Headline2", "Headline3", "CodeBlock", "Dash" }
+
+local function hl(name)
+	local group = vim.api.nvim_get_hl(0, { name = name, link = false })
+	return next(group) and group or nil
+end
+
+---Mix `amount` of `mix` into `base`; both are 24-bit RGB ints.
+local function blend(base, mix, amount)
+	local function channel(color, shift)
+		return math.floor(color / shift) % 256
+	end
+	local out = 0
+	for _, shift in ipairs({ 65536, 256, 1 }) do
+		local value = channel(base, shift) * (1 - amount) + channel(mix, shift) * amount
+		out = out + math.floor(value + 0.5) * shift
+	end
+	return out
+end
+
+---Foregrounds for the three heading levels.
+---
+---Prefer the theme's own markdown heading colors, but only when it actually
+---distinguishes the levels. Neovim links @markup.heading.N to Title by default,
+---so a theme that styles neither still resolves to one flat default color for
+---all three -- in that case fall back to semantic accents, which every theme
+---sets and which stay visually distinct.
+local function heading_colors()
+	local from_theme, distinct = {}, {}
+	for level = 1, 3 do
+		local heading = hl("@markup.heading." .. level .. ".markdown") or hl("@markup.heading." .. level)
+		from_theme[level] = heading and heading.fg or nil
+		if from_theme[level] then
+			distinct[from_theme[level]] = true
+		end
+	end
+
+	if #vim.tbl_keys(distinct) > 1 then
+		return from_theme
+	end
+
+	local accents = {}
+	for level, fallback in ipairs({ "Function", "Constant", "Type" }) do
+		local group = hl(fallback)
+		accents[level] = group and group.fg or from_theme[level]
+	end
+	return accents
+end
+
+local function style_headlines()
+	local normal = hl("Normal") or {}
+	local bg, fg = normal.bg, normal.fg
+
+	-- A subtle band behind the heading. CursorLine is already tuned per theme for
+	-- exactly this "slightly off the background" job; blend as a fallback. Blending
+	-- toward the foreground works on light and dark themes alike.
+	local band = (hl("CursorLine") or {}).bg
+	if not band and bg and fg then
+		band = blend(bg, fg, 0.08)
+	end
+	local code = (bg and fg) and blend(bg, fg, 0.05) or band
+
+	local colors = heading_colors()
+	for level = 1, 3 do
+		local name = "Headline" .. level
+		if not hl(name) then
+			vim.api.nvim_set_hl(0, name, { fg = colors[level], bg = band, bold = true })
+		end
+	end
+
+	if not hl("CodeBlock") then
+		vim.api.nvim_set_hl(0, "CodeBlock", { bg = code })
+	end
+	if not hl("Dash") then
+		local dash = hl("Special") or hl("Comment") or {}
+		vim.api.nvim_set_hl(0, "Dash", { fg = dash.fg, bold = true })
+	end
+end
+
+-- Clear our own definitions before the new colorscheme loads, so the check above
+-- sees what the incoming theme actually styles rather than last theme's leftovers.
+vim.api.nvim_create_autocmd("ColorSchemePre", {
+	group = vim.api.nvim_create_augroup("notes_headlines_reset", { clear = true }),
+	callback = function()
+		for _, name in ipairs(HEADLINE_GROUPS) do
+			pcall(vim.api.nvim_set_hl, 0, name, {})
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = vim.api.nvim_create_augroup("notes_headlines", { clear = true }),
+	callback = style_headlines,
+})
+
+-- plugin/theme.lua applies the Omarchy colorscheme after this file loads, which
+-- fires the autocmd above. Cover the case where a colorscheme is already active.
+style_headlines()
 
 require("headlines").setup({
 	markdown = {
