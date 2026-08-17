@@ -56,9 +56,9 @@ o.bind("SUPER + CTRL + L", "Move workspace to right monitor", hl.dsp.workspace.m
 -- Workspaces ----------------------------------------------------------------------
 
 hl.workspace_rule({
-  workspace = "special:scratchpad",
-  on_created_empty = '[float; size 1000 800; border 1; center] omarchy-launch-editor "+Obsidian today"',
-  persistent = false,
+	workspace = "special:scratchpad",
+	on_created_empty = '[float; size 1000 800; border 1; center] omarchy-launch-editor "+Obsidian dailies"',
+	persistent = false,
 })
 
 -- Default apps per workspace (launched on first visit when the workspace is empty).
