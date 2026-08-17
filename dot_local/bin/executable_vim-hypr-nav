@@ -59,4 +59,6 @@ if focused_pid="$(hyprctl activewindow -j | jq -e '.pid')"; then
     fi
 fi
 
-hyprctl dispatch movefocus "$dir"
+# Hyprland's Lua config (Omarchy 4 / Quattro) evaluates `hyprctl dispatch`
+# arguments as Lua, so the old shell-style `movefocus l` no longer parses.
+hyprctl dispatch "hl.dsp.focus({direction=\"$dir\"})"
