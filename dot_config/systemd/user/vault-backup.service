@@ -1,0 +1,6 @@
+[Unit]
+Description=Commit and push obsidian vault changes to git
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/vault-backup

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -uo pipefail
+VAULT="$HOME/vaults"
+if [ ! -e "$VAULT/.git" ]; then
+  git clone git@github.com:mrlorentx/vaults.git "$VAULT" || exit 0
+  git -C "$VAULT" config user.name "mrlorentx"
+  git -C "$VAULT" config user.email "joakim@murmel.se"
+fi

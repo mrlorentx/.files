@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Re-run when the units change:
+# service: {{ include "dot_config/systemd/user/vault-backup.service" | sha256sum }}
+# timer:   {{ include "dot_config/systemd/user/vault-backup.timer" | sha256sum }}
+set -uo pipefail
+systemctl --user daemon-reload || true
+systemctl --user enable --now vault-backup.timer || true
+loginctl enable-linger "$USER" 2>/dev/null || true
