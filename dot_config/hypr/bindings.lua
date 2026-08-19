@@ -57,7 +57,7 @@ o.bind("SUPER + CTRL + L", "Move workspace to right monitor", hl.dsp.workspace.m
 
 hl.workspace_rule({
 	workspace = "special:scratchpad",
-	on_created_empty = '[float; size 1000 800; border 1; center] omarchy-launch-editor "+Obsidian dailies"',
+	on_created_empty = '[float; size 1000 800; border 1; center] omarchy-launch-editor "+Obsidian today"',
 	persistent = false,
 })
 
